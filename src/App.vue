@@ -1,36 +1,23 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <SingleCard v-for="project in projects" 
-        :title = "project.title"
-        :description = "project.description"/>
-    </div>
-  </div>
+  <AppHeader />
+
+  <main class="container pt-3">
+    <router-view></router-view>
+  </main>
+  
 </template>
 
 <script>
   import axios from 'axios';
   import SingleCard from './components/SingleCard.vue';
+  import AppHeader from './components/AppHeader.vue';
   export default {
-    data() {
-      return {
-        projects : []
-      }
-    },
-    mounted () {
-    axios
-      .get('http://127.0.0.1:8000/api/projects')
-      .then((response) => {
-        this.projects = response.data.results;
-        console.log(this.projects);
-      })
-    },
     components : {
-      SingleCard
+      AppHeader
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import "/node_modules/bootstrap/scss/bootstrap";
 </style>
